@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House of Barrel - Bar Reservation & Takeaway System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>House of Barrel</h1>
+                <p>Premium Bar Experience</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#drinks" class="nav-link">Drinks Menu</a></li>
+                <li><a href="#food" class="nav-link">Food Menu</a></li>
+                <li><a href="#reservation" class="nav-link">Reserve Table</a></li>
+                <li><a href="#takeaway" class="nav-link">Order Takeaway</a></li>
+            </ul>
+            <!-- Added separate auth buttons container next to nav menu -->
+         <div class="nav-actions">
+
+    <a href="login.html" class="btn-login" id="loginBtn">Login / Register</a>
+
+    <button onclick="logout()" class="btn-login" id="logoutBtn" style="display:none;">
+        Logout
+    </button>
+</div>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to House of Barrel</h1>
+            <p class="hero-subtitle">Experience Premium Drinks & Fine Dining</p>
+            <div class="hero-buttons">
+                <a href="#reservation" class="btn btn-primary">Reserve a Table</a>
+                <a href="#drinks" class="btn btn-primary">View Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drinks Section -->
+    <section id="drinks" class="section drinks-section">
+        <div class="section-bg"></div>
+        <div class="container">
+            <h2 class="section-title">Our Drinks Collection</h2>
+            <p class="section-subtitle">Premium Selection of Alcoholic & Non-Alcoholic Beverages</p>
+            
+            <!-- Drink Categories -->
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All Drinks</button>
+                <button class="tab-btn" data-category="cocktails">Cocktails</button>
+                <button class="tab-btn" data-category="mocktails">Mocktails</button>
+                <button class="tab-btn" data-category="beverages">Beverages</button>
+            </div>
+
+            <div class="drinks-grid">
+                <!-- Cocktails -->
+                <div class="drink-card" data-category="cocktails" data-id="1">
+                    <img src="public/old-fashioned-cocktail.jpg" alt="Old Fashioned">
+                    <div class="card-content">
+                        <h3>Old Fashioned</h3>
+                        <p class="category-badge alcoholic">Cocktail</p>
+                        <p class="description">Classic whiskey cocktail with bitters and orange</p>
+                        <div class="card-footer">
+                            <span class="price">₹450</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="cocktails" data-id="4">
+                    <img src="public/margarita-cocktail.jpg" alt="Margarita">
+                    <div class="card-content">
+                        <h3>Margarita</h3>
+                        <p class="category-badge alcoholic">Cocktail</p>
+                        <p class="description">Tequila, lime juice, and triple sec</p>
+                        <div class="card-footer">
+                            <span class="price">₹420</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="cocktails" data-id="6">
+                    <img src="public/cosmopolitan-cocktail.jpg" alt="Cosmopolitan">
+                    <div class="card-content">
+                        <h3>Cosmopolitan</h3>
+                        <p class="category-badge alcoholic">Cocktail</p>
+                        <p class="description">Vodka, cranberry juice, and lime</p>
+                        <div class="card-footer">
+                            <span class="price">₹400</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="cocktails" data-id="5">
+                    <img src="public/mojito-cocktail.jpg" alt="Mojito">
+                    <div class="card-content">
+                        <h3>Classic Mojito</h3>
+                        <p class="category-badge alcoholic">Cocktail</p>
+                        <p class="description">Rum, mint, lime, and soda</p>
+                        <div class="card-footer">
+                            <span class="price">₹380</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mocktails -->
+                <div class="drink-card" data-category="mocktails" data-id="2">
+                    <img src="public/virgin-mojito.png" alt="Virgin Mojito">
+                    <div class="card-content">
+                        <h3>Virgin Mojito</h3>
+                        <p class="category-badge non-alcoholic">Mocktail</p>
+                        <p class="description">Fresh mint, lime, and soda</p>
+                        <div class="card-footer">
+                            <span class="price">₹180</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="mocktails" data-id="7">
+                    <img src="public/blue-lagoon-mocktail.jpg" alt="Blue Lagoon">
+                    <div class="card-content">
+                        <h3>Blue Lagoon</h3>
+                        <p class="category-badge non-alcoholic">Mocktail</p>
+                        <p class="description">Blue curacao syrup with lemonade</p>
+                        <div class="card-footer">
+                            <span class="price">₹200</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="mocktails" data-id="8">
+                    <img src="public/strawberry-daiquiri.jpg" alt="Strawberry Daiquiri">
+                    <div class="card-content">
+                        <h3>Strawberry Daiquiri</h3>
+                        <p class="category-badge non-alcoholic">Mocktail</p>
+                        <p class="description">Fresh strawberries, lime, and ice</p>
+                        <div class="card-footer">
+                            <span class="price">₹220</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="mocktails" data-id="9">
+                    <img src="public/pina-colada-mocktail.jpg" alt="Virgin Pina Colada">
+                    <div class="card-content">
+                        <h3>Virgin Piña Colada</h3>
+                        <p class="category-badge non-alcoholic">Mocktail</p>
+                        <p class="description">Coconut cream, pineapple juice</p>
+                        <div class="card-footer">
+                            <span class="price">₹210</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beverages -->
+                <div class="drink-card" data-category="beverages" data-id="3">
+                    <img src="public/fresh-lemonade.png" alt="Fresh Lemonade">
+                    <div class="card-content">
+                        <h3>Fresh Lemonade</h3>
+                        <p class="category-badge non-alcoholic">Beverage</p>
+                        <p class="description">Freshly squeezed lemon juice</p>
+                        <div class="card-footer">
+                            <span class="price">₹120</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="beverages" data-id="10">
+                    <img src="public/mango-smoothie.jpg" alt="Mango Smoothie">
+                    <div class="card-content">
+                        <h3>Mango Smoothie</h3>
+                        <p class="category-badge non-alcoholic">Beverage</p>
+                        <p class="description">Creamy mango blended smoothie</p>
+                        <div class="card-footer">
+                            <span class="price">₹180</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="beverages" data-id="11">
+                        <img src="public/fresh-orange-juice-in-glass-pitcher.jpg" alt="Orange Juice">
+                    <div class="card-content">
+                        <h3>Fresh Orange Juice</h3>
+                        <p class="category-badge non-alcoholic">Beverage</p>
+                        <p class="description">Freshly squeezed oranges</p>
+                        <div class="card-footer">
+                            <span class="price">₹140</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink-card" data-category="beverages" data-id="12">
+                    <img src="public/iced-coffee-refreshment.png" alt="Iced Coffee">
+                    <div class="card-content">
+                        <h3>Iced Coffee</h3>
+                        <p class="category-badge non-alcoholic">Beverage</p>
+                        <p class="description">Cold brew with ice and cream</p>
+                        <div class="card-footer">
+                            <span class="price">₹160</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div id="dynamicMenu" class="menu-grid"></div>    </section>
+
+    <!-- Food Section -->
+    <section id="food" class="section food-section">
+        <div class="section-bg"></div>
+        <div class="container">
+            <h2 class="section-title">Quick Bites</h2>
+            <p class="section-subtitle">Perfect Pairings for Your Drinks</p>
+            
+            <div class="food-grid">
+                <div class="food-card">
+                    <img src="public/margherita-pizza.png" alt="Pizza">
+                    <div class="card-content">
+                        <h3>Margherita Pizza</h3>
+                        <p class="description">Classic Italian pizza with fresh mozzarella</p>
+                        <div class="card-footer">
+                            <span class="price">₹320</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <img src="public/grilled-chicken-burger.jpg" alt="Burger">
+                    <div class="card-content">
+                        <h3>Chicken Burger</h3>
+                        <p class="description">Grilled chicken with premium toppings</p>
+                        <div class="card-footer">
+                            <span class="price">₹280</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <img src="public/caesar-salad.png" alt="Caesar Salad">
+                    <div class="card-content">
+                        <h3>Caesar Salad</h3>
+                        <p class="description">Fresh romaine with parmesan and croutons</p>
+                        <div class="card-footer">
+                            <span class="price">₹220</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <img src="public/fish-chips.jpg" alt="Fish and Chips">
+                    <div class="card-content">
+                        <h3>Fish & Chips</h3>
+                        <p class="description">Crispy battered fish with golden fries</p>
+                        <div class="card-footer">
+                            <span class="price">₹380</span>
+                            <button class="btn-add">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="section reservation-section">
+        <div class="section-bg"></div>
+        <div class="container">
+            <h2 class="section-title">Reserve Your Table</h2>
+            <p class="section-subtitle">Book your spot for an unforgettable evening</p>
+            
+            <div class="form-container">
+                <form id="reservationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                           <select id="guests" required>
+                            <option value="">Select</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            </select>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="tableType">Table Preference</label>
+                              <select id="tableType" required>
+                                <option value="">Select</option>
+                                <option value="regular">Regular Table</option>
+                                <option value="booth">Booth</option>
+                                <option value="bar">Bar Seating</option>
+                                <option value="outdoor">Outdoor</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialRequests">Special Requests</label>
+                        <textarea id="specialRequests" name="specialRequests" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit">Confirm Reservation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Takeaway Section -->
+    <section id="takeaway" class="section takeaway-section">
+        <div class="section-bg"></div>
+        <div class="container">
+            <h2 class="section-title">Order Takeaway</h2>
+            <p class="section-subtitle">Enjoy our drinks and food at home</p>
+            
+            <div id="cartContainer" class="cart-container">
+                <h3>Your Order</h3>
+                <div id="cartItems" class="cart-items">
+                    <p class="empty-cart">Your cart is empty. Add items from our menu!</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Fee:</span>
+                        <span id="deliveryFee">₹50</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">₹0</span>
+                    </div>
+                </div>
+                
+                <form id="takeawayForm" class="takeaway-form">
+                    <div class="form-group">
+                        <label for="customerName">Name</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Delivery Address</label>
+                        <textarea id="address" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    
+
+<script>
+document.getElementById("reservationForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+  const guestsRaw = document.getElementById("guests").value;
+  const tableType = document.getElementById("tableType").value;
+  const specialRequests = document.getElementById("specialRequests").value.trim();
+
+  if (
+    name.length < 2 ||
+    phone.length < 8 ||
+    !date ||
+    !time ||
+    guestsRaw === "" ||
+    tableType === ""
+  ) {
+    alert("Please fill all required fields correctly");
+    return;
+  }
+
+  const guests = Number(guestsRaw);
+
+  if (Number.isNaN(guests)) {
+    alert("Guests must be a number");
+    return;
+  }
+
+  const data = {
+    name,
+    phone,
+    date,
+    time,
+    guests,
+    tableType,                 // ✅ correct
+    specialRequests: specialRequests || "" // ✅ correct
+  };
+
+  console.log("📤 Sending reservation:", data);
+
+try {
+  const token = localStorage.getItem("access_token");
+
+  if (!token) {
+    alert("⚠ Please login first.");
+    return;
+  }
+
+  const response = await fetch("http://127.0.0.1:8000/api/reservation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    console.error("❌ Backend error:", result);
+    alert(result.detail || "Reservation failed");
+    return;
+  }
+
+  alert("✅ Reservation confirmed!");
+  console.log("✅ Saved:", result);
+  document.getElementById("reservationForm").reset();
+
+} catch (err) {
+  console.error("❌ Fetch error:", err);
+  alert("Failed to connect to server");
+}
+
+});
+</script>
+
+
+
+
+  
+<!-- Payment Success Modal -->
+<div id="paymentModal" class="payment-modal">
+  <div class="payment-modal-content">
+    <div class="checkmark-circle">
+      <div class="checkmark"></div>
+    </div>
+    <h2>Payment Successful!</h2>
+    <p id="transactionText"></p>
+<button onclick="downloadInvoice()">Download Invoice</button>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-container">
+
+        <!-- About -->
+        <div class="footer-section">
+        <h3>About House of Barrel</h3>
+        <p>
+            House of Barrel is a premium bar and dining destination offering
+            handcrafted cocktails, fine cuisine, and an unforgettable ambiance.
+            We combine modern elegance with classic charm to create the perfect
+            nightlife and dining experience.
+        </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="#drinks">Drinks Menu</a></li>
+            <li><a href="#food">Food Menu</a></li>
+            <li><a href="#reserve">Reservations</a></li>
+            <li><a href="#takeaway">Takeaway</a></li>
+        </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+        <h3>Contact</h3>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> support@houseofbarrel.com</p>
+        <p><strong>Address:</strong> 123 MG Road, Pune, Maharashtra</p>
+        </div>
+
+        <!-- Business Hours -->
+        <div class="footer-section">
+        <h3>Business Hours</h3>
+        <p>Mon - Fri: 4:00 PM - 12:00 AM</p>
+        <p>Sat - Sun: 12:00 PM - 1:00 AM</p>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 House of Barrel. Crafted with passion.
+    </div>
+    </footer>
+<script src="./script.js"></script>

@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - House of Barrel</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+  const role = localStorage.getItem("role");
+
+  if (role !== "admin") {
+    window.location.href = "index.html";
+  }
+</script>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <h2>House of Barrel</h2>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#reservations" class="nav-item">
+                    <span class="icon">📅</span>
+                    <span>Reservations</span>
+                </a>
+                <a href="#orders" class="nav-item">
+                    <span class="icon">🛍️</span>
+                    <span>Takeaway Orders</span>
+                </a>
+                <a href="#menu" class="nav-item">
+                    <span class="icon">🍸</span>
+                    <span>Menu Management</span>
+                </a>
+                
+                <a href="#reports" class="nav-item">
+                    <span class="icon">📈</span>
+                    <span>Reports</span>
+                </a>
+                <!-- Updated back link to use proper logout -->
+                <a href="#" onclick="adminLogout()" class="nav-item">
+                    <span class="icon">🚪</span>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <div class="header-actions">
+                    <!-- Display logged in admin email -->
+                    <span class="admin-user" id="adminUserDisplay">Admin User</span>
+                    <button class="logout-btn" onclick="adminLogout()">Logout</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <h2 class="section-heading">Overview</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <h3>Today's Reservations</h3>
+                            <p class="stat-number">24</p>
+                            <span class="stat-change positive">+12%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🛍️</div>
+                        <div class="stat-info">
+                            <h3>Takeaway Orders</h3>
+                            <p class="stat-number">18</p>
+                            <span class="stat-change positive">+8%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3>Today's Revenue</h3>
+                            <p class="stat-number">₹45,620</p>
+                            <span class="stat-change positive">+15%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <h3>Average Rating</h3>
+                            <p class="stat-number">4.8</p>
+                            <span class="stat-change positive">+0.2</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        
+
+
+            <!-- Reservations Section -->
+            <section id="reservations" class="admin-section">
+                <h2 class="section-heading">Table Reservations</h2>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer Name</th>
+                                <th>Phone</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Guests</th>
+                                <th>Table Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                            <tbody id="reservationTableBody">
+                        </tbody>
+
+                    </table>
+                </div>
+            </section>
+
+           <!-- Orders Section -->
+<section id="orders" class="admin-section">
+    <h2 class="section-heading">Takeaway Orders</h2>
+    
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="orders-table-body">
+            </tbody>
+        </table>
+    </div>
+</section>
+
+            <!-- Menu Management Section -->
+            <section id="menu" class="admin-section">
+                <h2 class="section-heading">Menu Management</h2>
+                
+                
+                <div class="menu-grid">
+                    <div class="menu-card" data-id="1">
+                        <img src="public/old-fashioned-cocktail.jpg" alt="Old Fashioned">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Old Fashioned</h3>
+                                    <p class="menu-category">Cocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹450</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-card" data-id="2">
+                        <img src="public/virgin-mojito.png" alt="Virgin Mojito">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Virgin Mojito</h3>
+                                    <p class="menu-category">Mocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹180</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-card" data-id="3">
+                        <img src="public/fresh-lemonade.png" alt="Fresh Lemonade">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Fresh Lemonade</h3>
+                                    <p class="menu-category">Beverage</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹120</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-card" data-id="4">
+                        <img src="public/margarita-cocktail.jpg" alt="Margarita">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Margarita</h3>
+                                    <p class="menu-category">Cocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹420</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-card" data-id="5">
+                        <img src="public/mojito-cocktail.jpg" alt="Mojito">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Classic Mojito</h3>
+                                    <p class="menu-category">Cocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹380</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-card" data-id="6">
+                        <img src="public/cosmopolitan-cocktail.jpg" alt="Cosmopolitan">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Cosmopolitan</h3>
+                                    <p class="menu-category">Cocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹440</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-card" data-id="7">
+                    <img src="public/blue-lagoon-mocktail.jpg" alt="Blue Lagoon">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Blue Lagoon</h3>
+                                    <p class="menu-category">Mocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹200</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                </div>
+                    <div class="menu-card" data-id="8">
+                    <img src="public/strawberry-daiquiri.jpg" alt="Strawberry Daiquiri">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Strawberry Daiquiri</h3>
+                                    <p class="menu-category">Mocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹220</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                </div>
+                
+                <div class="menu-card" data-id="9">
+                    <img src="public/pina-colada-mocktail.jpg" alt="Virgin Pina Colada">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Virgin Pina Colada </h3>
+                                    <p class="menu-category">Mocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹210</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                </div>
+                 <div class="menu-card" data-id="10">
+    <img src="public/mango-smoothie.jpg" alt="Mango Smoothie">
+    <div class="menu-card-content">
+        <div class="menu-header">
+            <div>
+                <h3>Mango Smoothie</h3>
+                <p class="menu-category">Beverage</p>
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" checked class="availability-toggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+        <p class="menu-price">₹180</p>
+        <p class="availability-status available">Available</p>
+        <div class="menu-actions">
+            <button class="action-btn edit">Edit</button>
+            <button class="action-btn delete">Delete</button>
+        </div>
+    </div>
+</div>
+                 <div class="menu-card" data-id="11">
+                    <img src="public/fresh-orange-juice-in-glass-pitcher.jpg" alt="Orange Juice">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Orange Juice</h3>
+                                    <p class="menu-category">Mocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹140</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                </div>
+                 <div class="menu-card" data-id="12">
+                    <img src="public/iced-coffee-refreshment.png" alt="Iced Coffee">
+                        <div class="menu-card-content">
+                            <div class="menu-header">
+                                <div>
+                                    <h3>Iced Coffee</h3>
+                                    <p class="menu-category">Mocktail</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked class="availability-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="menu-price">₹160</p>
+                            <p class="availability-status available">Available</p>
+                            <div class="menu-actions">
+                                <button class="action-btn edit">Edit</button>
+                                <button class="action-btn delete">Delete</button>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </section>
+
+            
+            <!-- Reports Section -->
+            <section id="reports" class="admin-section">
+                <h2 class="section-heading">Sales Reports</h2>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Weekly Sales</h3>
+                        <canvas id="weeklyChart"></canvas>
+                        <p class="report-total">Total: ₹2,45,600</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>Popular Items</h3>
+                        <div class="popular-items">
+                            <div class="popular-item">
+                                <span>1. Old Fashioned</span>
+                                <span class="item-count">145 orders</span>
+                            </div>
+                            <div class="popular-item">
+                                <span>2. Virgin Mojito</span>
+                                <span class="item-count">132 orders</span>
+                            </div>
+                            <div class="popular-item">
+                                <span>3. Margarita</span>
+                                <span class="item-count">98 orders</span>
+                            </div>
+                            <div class="popular-item">
+                                <span>4. Fresh Lemonade</span>
+                                <span class="item-count">87 orders</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Added admin authentication script -->
+    <script>
+        // Display admin email
+        const adminEmail = localStorage.getItem('userEmail');
+        if (adminEmail) {
+            document.getElementById('adminUserDisplay').textContent = adminEmail;
+        }
+        
+        // Admin logout function
+        function adminLogout() {
+            const confirmLogout = confirm('Are you sure you want to logout from admin dashboard?');
+            if (confirmLogout) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                window.location.href = 'admin-login.html';
+            }
+        }
+    </script>
+</script>
+    <script src="admin-script.js"></script>
+
+</body>
+</html>

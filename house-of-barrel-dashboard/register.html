@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Register - House of Barrel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="login-container">
+
+            <a href="index.html" class="back-link">← Back to Home</a>
+
+            <div class="login-header">
+                <h1 class="login-logo">House of Barrel</h1>
+                <p class="login-subtitle">Customer Register</p>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+
+            <form id="customerRegisterForm">
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="Enter your email" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter your password" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Register
+                </button>
+
+            </form>
+
+            <div class="login-footer">
+                <p>
+                    Already have an account? 
+                    <a href="login.html">Login</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+document.getElementById('customerRegisterForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('errorMessage');
+
+    errorMessage.classList.remove('show');
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    });
+
+    let data = {};
+    try {
+        data = await response.json();
+    } catch {
+        data = {};
+    }
+
+    // Clear previous state
+    errorMessage.classList.remove("show", "success");
+    errorMessage.textContent = "";
+
+    if (!response.ok) {
+        // If user already exists
+        if (data.detail && data.detail.toLowerCase().includes("exist")) {
+            errorMessage.textContent = "An account with this email already exists. Please login.";
+        } else {
+            errorMessage.textContent = data.detail || "Registration failed. Please try again.";
+        }
+
+        errorMessage.classList.add("show");
+        return;
+    }
+
+    // ✅ Success message
+    errorMessage.textContent = "Registration successful! Redirecting to login...";
+    errorMessage.classList.add("show", "success");
+
+    setTimeout(() => {
+        window.location.href = "login.html";
+    }, 1800);
+
+} catch (err) {
+    console.error(err);
+    errorMessage.classList.remove("success");
+    errorMessage.textContent = "Unable to connect to server. Please try again later.";
+    errorMessage.classList.add("show");
+}
+
+
+
+});
+</script>
+
+</body>
+</html>
+    
