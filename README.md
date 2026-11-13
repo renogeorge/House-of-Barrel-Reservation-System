@@ -55,19 +55,19 @@ The frontend communicates with backend APIs to process reservations, authenticat
 ## Screenshots
 
 ### Homepage
-![Homepage](screenshots/homepage.png)
+![Homepage](screenshots/homepage.png.png)
 
 ### Menu1
-![Menu](screenshots/menu1.png)
+![Menu](screenshots/menu1.png.png)
 
 ### Menu2
-![Menu](screenshots/menu2.png)
+![Menu](screenshots/menu2.png.png)
 
 ### Reservation
-![Reservation](screenshots/reservation.png)
+![Reservation](screenshots/reservation.png.png)
 
 ### Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
+![Admin Dashboard](screenshots/admin-dashboard.png.png)
 
 ## Project Structure
 
